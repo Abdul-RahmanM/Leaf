@@ -1,3 +1,6 @@
+html {
+    background-color: #1DF682; /* Set the background color of the entire page */
+}
 /* Container for the whole page */
 div {
   font-family: Arial, sans-serif;
@@ -65,4 +68,20 @@ form input[type="submit"] {
 
 form input[type="submit"]:hover {
   background-color: #0056b3;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-color: rgb(29, 246, 130); /* Set the header background color */
+    padding: 20px;
+    text-align: center;
+}
+
+.sidebar {
+    background-color: #333; /* Set the sidebar background color */
+    color: #fff;
+    padding: 20px;
 }

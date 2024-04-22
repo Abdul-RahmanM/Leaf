@@ -1,0 +1,33 @@
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 110px; /* Adjust according to your layout */
+    height: calc(100% - 110px); /* Adjust according to your layout */
+    width: 200px;
+    background-color: #1DF682; /* Set the background color to green */
+    color: #fff;
+    padding: 20px;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1); /* Add drop shadow to the sidebar */
+
+}
+
+.navigation {
+    list-style-type: none; /* Remove the dots */
+    padding: 0;
+}
+
+.sidebar-button {
+    width: 100%; /* Make the buttons full width */
+    padding: 10px;
+    border-radius: 20px; /* Make the buttons rounded */
+    margin-bottom: 10px; /* Add spacing between buttons */
+    background-color: black; /* Button background color */
+    color: #1DF682; /* Button text color */
+    border: none; /* Remove button border */
+    cursor: pointer;
+}
+
+.sidebar-button:hover {
+    background-color: #fff; /* Change background color on hover */
+    color: #1DF682; /* Change text color on hover */
+}

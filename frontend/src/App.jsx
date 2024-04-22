@@ -4,7 +4,9 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Home from "./pages/Home"
 import NotFound from "./pages/NotFound"
+import EventPage from "./pages/EventPage"
 import ProtectedRoute from "./components/ProtectedRoute"
+
 
 function Logout() {
   localStorage.clear()
@@ -26,10 +28,18 @@ function App() {
             <ProtectedRoute>
               <Home />
             </ProtectedRoute>
+
+          }
+        />
+        <Route
+          path="/eventPage"
+          element={
+            <ProtectedRoute>
+              <EventPage />
+            </ProtectedRoute>
           }
         />
         <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Logout />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<RegisterAndLogout />} />
         <Route path="*" element={<NotFound />}></Route>
