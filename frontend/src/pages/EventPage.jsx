@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import api from "../api";
-import Event from "../components/Event"; // Renamed Event component
-import "../styles/Home.css";
+import Event from "../components/Event";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import "../styles/EventPage.css";
 
 function EventPage() {
   const [events, setEvents] = useState([]);
@@ -48,61 +48,59 @@ function EventPage() {
   };
 
   return (
-    <div>
-        <div>
-            <Sidebar />
-            <Header />
-        </div>
-      <div>
+    <div className="event-page">
+      <Header />
+      <Sidebar />
+      <div className="content">
         <h2>Events</h2>
         {events.map((event) => (
-          <Event event={event} onDelete={deleteEvent} key={event.id} /> // Changed Event to EventItem
+          <Event event={event} onDelete={deleteEvent} key={event.id} />
         ))}
+        <h2>Create an Event</h2>
+        <form onSubmit={createEvent}>
+          <label htmlFor="title">Title:</label>
+          <br />
+          <input
+            type="text"
+            id="title"
+            name="title"
+            required
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+          />
+          <label htmlFor="content">Content:</label>
+          <br />
+          <textarea
+            id="content"
+            name="content"
+            required
+            onChange={(e) => setContent(e.target.value)}
+            value={content}
+          ></textarea>
+          <br />
+          <label htmlFor="content">RSVP:</label>
+          <input
+            type="boolean"
+            id="RSVP"
+            name="RSVP"
+            required
+            onChange={(e) => setRSVP(e.target.value)}
+            value={RSVP}
+          />
+          <br />
+          <label htmlFor="content">Event Time:</label>
+          <input
+            type="text"
+            id="event_time"
+            name="event_time"
+            required
+            onChange={(e) => setEventTime(e.target.value)}
+            value={event_time}
+          />
+          <br />
+          <input type="submit" value="Submit"></input>
+        </form>
       </div>
-      <h2>Create an Event</h2>
-      <form onSubmit={createEvent}>
-        <label htmlFor="title">Title:</label>
-        <br />
-        <input
-          type="text"
-          id="title"
-          name="title"
-          required
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
-        />
-        <label htmlFor="content">Content:</label>
-        <br />
-        <textarea
-          id="content"
-          name="content"
-          required
-          onChange={(e) => setContent(e.target.value)}
-          value={content}
-        ></textarea>
-        <br />
-        <label htmlFor="content">RSVP:</label>
-        <input
-          type="boolean"
-          id="RSVP"
-          name="RSVP"
-          required
-          onChange={(e) => setRSVP(e.target.value)}
-          value={RSVP}
-        />
-        <br />
-        <label htmlFor="content">Event Time:</label>
-        <input
-          type="text"
-          id="event_time"
-          name="event_time"
-          required
-          onChange={(e) => setEventTime(e.target.value)}
-          value={event_time}
-        />
-        <br />
-        <input type="submit" value="Submit"></input>
-      </form>
     </div>
   );
 }

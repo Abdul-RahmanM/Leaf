@@ -1,0 +1,11 @@
+.event-container {
+  background-color: #D4F2E2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px; /* Add padding around each event card */
+  margin-bottom: 20px; /* Add margin between each event card */
+}
+
+.event {
+  /* Add styling for the event items */
+
+}
