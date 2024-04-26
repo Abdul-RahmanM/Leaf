@@ -1,0 +1,65 @@
+.listing-option {
+    width: 100%; /* Full width of the container */
+    max-width: 600px; /* Maximum width of the option for better readability */
+    margin: 20px auto; /* Center the box and add spacing */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Ensures nothing spills out */
+}
+
+.title {
+    width: 100%; /* Full width of the container */
+    max-width:300px; /* Maximum width of the option for better readability */
+    margin: 30px auto; /* Center the box and add spacing */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Ensures nothing spills out */
+}
+
+
+.option-link {
+    display: block; /* Makes the entire area clickable */
+    text-decoration: none; /* Removes underline from the link */
+    color: inherit; /* Inherits text color from parent */
+}
+
+.option-content {
+    display: flex; /* Aligns icon and text side by side */
+    align-items: center; /* Center items vertically */
+    padding: 20px; /* Padding inside the container */
+    background-color: #fff; /* Background color */
+}
+
+.option-content:hover {
+    background-color: #f7f7f7; /* Light grey background on hover for interactivity */
+}
+
+.icon-public {
+    width: 50px; /* Size of the icon */
+    height: 50px; /* Size of the icon */
+    background-image: url('https://static.thenounproject.com/png/4612037-200.png'); /* Icon image */
+    background-size: cover; /* Ensures the icon covers the entire element */
+    margin-right: 20px; /* Space between the icon and the text */
+}
+
+.icon-private {
+    width: 50px; /* Size of the icon */
+    height: 50px; /* Size of the icon */
+    background-image: url('https://cdn-icons-png.flaticon.com/512/1388/1388990.png'); /* Icon image */
+    background-size: cover; /* Ensures the icon covers the entire element */
+    margin-right: 20px; /* Space between the icon and the text */
+}
+
+
+.option-details {
+    flex-grow: 1; /* Allows the text block to fill the remaining space */
+}
+
+.option-title {
+    font-size: 18px; /* Larger font size for the title */
+    font-weight: bold; /* Bold font for emphasis */
+}
+
+.option-description {
+    font-size: 14px; /* Smaller font size for the description */
+    color: #666; /* Dark grey color for the text */
+}

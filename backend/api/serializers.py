@@ -20,5 +20,5 @@ class NoteSerializer(serializers.ModelSerializer):
 class ComplexEventSerializer(serializers.ModelSerializer):
     class Meta:
         model = ComplexEvent
-        fields = ["id", "title", "content", "RSVP", "event_time", "created_at", "author"]
+        fields = ["id", "title", "image", "content", "RSVP", "event_time", "created_at", "author"]
         extra_kwargs = {"author": {"read_only": True}}

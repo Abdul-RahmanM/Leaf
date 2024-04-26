@@ -3,38 +3,32 @@ import api from "../api";
 import Event from "../components/Event";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import getUserID from "../hooks/getUserID";
 import "../styles/EventPage.css";
+import { useNavigate, useLocation } from "react-router-dom";
+
 
 function EventPage() {
   const [events, setEvents] = useState([]);
-  const [content, setContent] = useState("");
-  const [title, setTitle] = useState("");
-  const [RSVP, setRSVP] = useState([]);
-  const [event_time, setEventTime] = useState("");
+  const [filters, setFilters] = useState({});
+  const location = useLocation();
 
   useEffect(() => {
-    getEvents();
-  }, []);
+    getEvents(filters);
+  }, [filters]);
 
-  const getEvents = () => {
+  const getEvents = (filters = {}) => {
+    filters = { "self_filter": true };
     api
-      .get("/api/events/")
+      .get("/api/events/", { params: filters })
       .then((res) => res.data)
       .then((data) => setEvents(data))
       .catch((err) => alert(err));
   };
 
-  const createEvent = (e) => {
-    e.preventDefault();
-    api
-      .post("/api/events/", { content, title, RSVP, event_time })
-      .then((res) => {
-        if (res.status === 201) alert("event created");
-        else alert("failed to make event");
-        getEvents();
-      })
-      .catch((err) => alert(err));
-  };
+  const updateFilters = (newFilters) => {
+    setFilters(newFilters);
+  }
 
   const deleteEvent = (id) => {
     api
@@ -42,64 +36,24 @@ function EventPage() {
       .then((res) => {
         if (res.status === 204) alert("Event deleted!");
         else alert("Failed to delete event.");
-        getEvents();
+        getEvents(filters);
       })
       .catch((error) => alert(error));
   };
 
   return (
     <div className="event-page">
+
       <Header />
       <Sidebar />
       <div className="content">
-        <h2>Events</h2>
-        {events.map((event) => (
-          <Event event={event} onDelete={deleteEvent} key={event.id} />
+        <h1 className="created-title">Created Events</h1>
+      </div>
+      <div className="content">
+              {events.map((event) => (
+          <Event event={event} onDelete={deleteEvent} isPreview="false" key={event.id} />
+
         ))}
-        <h2>Create an Event</h2>
-        <form onSubmit={createEvent}>
-          <label htmlFor="title">Title:</label>
-          <br />
-          <input
-            type="text"
-            id="title"
-            name="title"
-            required
-            onChange={(e) => setTitle(e.target.value)}
-            value={title}
-          />
-          <label htmlFor="content">Content:</label>
-          <br />
-          <textarea
-            id="content"
-            name="content"
-            required
-            onChange={(e) => setContent(e.target.value)}
-            value={content}
-          ></textarea>
-          <br />
-          <label htmlFor="content">RSVP:</label>
-          <input
-            type="boolean"
-            id="RSVP"
-            name="RSVP"
-            required
-            onChange={(e) => setRSVP(e.target.value)}
-            value={RSVP}
-          />
-          <br />
-          <label htmlFor="content">Event Time:</label>
-          <input
-            type="text"
-            id="event_time"
-            name="event_time"
-            required
-            onChange={(e) => setEventTime(e.target.value)}
-            value={event_time}
-          />
-          <br />
-          <input type="submit" value="Submit"></input>
-        </form>
       </div>
     </div>
   );

@@ -1,11 +1,36 @@
+.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust minimum size as needed */
+  gap: 40px; /* Space between cards */
+  padding: 20px;
+}
+
 .event-container {
   background-color: #D4F2E2;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px; /* Add padding around each event card */
-  margin-bottom: 20px; /* Add margin between each event card */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.event {
-  /* Add styling for the event items */
+.event-image {
+  width: auto;
+  height: 200px;
+}
 
+.event-title {
+  font-size: 18px; /* Adjusted for smaller card size */
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.event-date {
+  font-size: 16px;
+  color: #555;
+  font-style: italic;
+}
+
+.event-content {
+  text-align: center;
 }

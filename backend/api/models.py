@@ -1,7 +1,11 @@
+import datetime
+
 from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+
+
 class Note(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
@@ -13,9 +17,10 @@ class Note(models.Model):
 
 class ComplexEvent(models.Model):
     title = models.CharField(max_length=50)
+    image = models.ImageField(default="../assets/placeholder.jpg", upload_to="images/")
     content = models.TextField()
-    RSVP = models.CharField(max_length=50)
-    event_time = models.CharField(max_length=50)
+    RSVP = models.BooleanField()
+    event_time = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="events")
 

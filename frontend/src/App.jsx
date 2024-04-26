@@ -5,6 +5,9 @@ import Register from "./pages/Register"
 import Home from "./pages/Home"
 import NotFound from "./pages/NotFound"
 import EventPage from "./pages/EventPage"
+import EventType from "./pages/EventType"
+import Explore from "./pages/Explore"
+import Create from "./pages/Create"
 import ProtectedRoute from "./components/ProtectedRoute"
 
 
@@ -35,7 +38,31 @@ function App() {
           path="/eventPage"
           element={
             <ProtectedRoute>
+              <Explore />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/yourEvents"
+          element={
+            <ProtectedRoute>
               <EventPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/eventType"
+          element={
+            <ProtectedRoute>
+              <EventType />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/eventCreate"
+          element={
+            <ProtectedRoute>
+              <Create />
             </ProtectedRoute>
           }
         />
