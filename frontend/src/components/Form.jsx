@@ -22,7 +22,15 @@ function Form({ route, method }) {
             if (method === "login") {
                 localStorage.setItem(ACCESS_TOKEN, res.data.access);
                 localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+                // Fetch user ID after successful login
+                const userRes = await api.get("api/get_current_user_id/", {
+                    headers: {
+                        Authorization: `Bearer ${res.data.access}`,
+                    },
+                });
+                localStorage.setItem("USER_ID", userRes.data.user_id);
                 localStorage.setItem("USERNAME", username);
+
                 navigate("/")
             } else {
                 navigate("/login")

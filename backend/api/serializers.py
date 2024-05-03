@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Note, ComplexEvent
+from .models import Note, ComplexEvent, Task
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -18,7 +20,23 @@ class NoteSerializer(serializers.ModelSerializer):
         extra_kwargs = {"author": {"read_only": True}}
 
 class ComplexEventSerializer(serializers.ModelSerializer):
+    collaborators = UserSerializer(many=True, read_only=True)
+
     class Meta:
         model = ComplexEvent
-        fields = ["id", "title", "image", "content", "RSVP", "event_time", "created_at", "author"]
+        fields = ["id", "title", "image", "content", "RSVP", "collaborators", "event_time", "created_at", "author"]
+        extra_kwargs = {
+            "author": {"read_only": True},
+            "title": {"required": False},
+            "image": {"required": False},
+            "content": {"required": False},
+            "RSVP": {"required": False},
+            "event_time": {"required": False},
+            "created_at": {"read_only": True},
+        }
+
+class TaskSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Task
+        fields = ["id", "event", "name" ,"collaborators", "author"]
         extra_kwargs = {"author": {"read_only": True}}

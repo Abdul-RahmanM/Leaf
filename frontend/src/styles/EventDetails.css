@@ -1,0 +1,77 @@
+.event-detail-content {
+  display: grid;
+  gap: 40px; /* Space between cards */
+  align-items: center;
+}
+
+.event-detail-container {
+  background-color: #D4F2E2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center   ;
+  text-decoration: none;
+  color: inherit;
+
+}
+
+.event-detail-image {
+  width: auto;
+  height: 200px;
+}
+
+.event-detail-title {
+  font-size: 18px; /* Adjusted for smaller card size */
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.event-detail-date {
+  font-size: 16px;
+  color: #555;
+  font-style: italic;
+}
+
+.event-detail-content {
+  text-align: center;
+}
+
+/* Button Options */
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Adjust as needed */
+}
+
+/* Collaboration Section Styles */
+
+.collaboration-container {
+  background-color: #1DF682;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-decoration: none;
+  color: inherit;
+  width: fit-content;
+  position: absolute;
+  top: 100px;
+  left: 230px;
+  margin: 20px;
+}
+
+.collaboration-container button {
+  margin-top: 10px; /* Add some space between input and button */
+  background-color: black; /* Set button background color to black */
+  color: white; /* Set button text color to white */
+  border: none; /* Remove button border */
+  padding: 10px 20px; /* Adjust button padding */
+  cursor: pointer; /* Set cursor to pointer */
+}
+
+.collaboration-container button:hover {
+  background-color: #333; /* Darken button color on hover */
+}
+
+

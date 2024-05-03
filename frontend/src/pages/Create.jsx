@@ -1,20 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import api from "../api";
+import { useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import DatePicker from "react-datepicker";
 import Event from "../components/Event";
+import parseEventDetailsFromPrompt from "../hooks/parseEventDetailsFromPrompt";
 import "react-datepicker/dist/react-datepicker.css";
 import "../styles/Create.css";
 
 function Create() {
+  const location = useLocation();
+  const { eventDetailsFromPrompt } = location.state;
+  const { isEditing } = location.state;
+  const { event } = location.state
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [RSVP, setRSVP] = useState(false);
   const [eventTime, setEventTime] = useState(new Date()); // Initialize with current date and time
   const [image, setImage] = useState(null);
 
-  const createEvent = (e) => {
+  // Load the data from AI prompt for first loading
+  useEffect(() => {
+  if (eventDetailsFromPrompt) {
+    console.log("TRUE");
+    const eventDetails = parseEventDetailsFromPrompt(eventDetailsFromPrompt);
+    setTitle(eventDetails.Title);
+    setContent(eventDetails.Description);
+    setEventTime(new Date(eventDetails.Date));
+  }
+
+  // Load existing event data because editing
+  if (isEditing) {
+    setTitle(event.title);
+    console.log("image", event.image);
+    setImage(event.image);
+    setContent(event.content);
+    setEventTime(new Date(event.event_time));
+    setRSVP(event.RSVP);
+  }
+  }, []);
+
+
+  const handleSubmission = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -26,20 +54,37 @@ function Create() {
       formData.append("image", image);
     }
 
-    api.post("/api/events/", formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    })
-    .then(res => {
-      if (res.status === 201) {
-        alert("Event created");
-        // You may want to redirect or perform other actions upon successful creation
-      } else {
-        alert("Failed to make event");
-      }
-    })
-    .catch(err => alert(err));
+    if (isEditing) {
+        api.patch(`/api/events/${event.id}`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then(res => {
+          if (res.status === 200 || res.status === 204) {
+            alert("Event Edited successfully");
+            // You may want to redirect or perform other actions upon successful creation
+          } else {
+            alert("Failed to edit event");
+          }
+        })
+        .catch(err => alert(err));
+    } else {
+        api.post("/api/events/", formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then(res => {
+          if (res.status === 201) {
+            alert("Event created");
+            // You may want to redirect or perform other actions upon successful creation
+          } else {
+            alert("Failed to make event");
+          }
+        })
+        .catch(err => alert(err));
+    }
   };
 
   const handleImageChange = (e) => {
@@ -53,7 +98,7 @@ function Create() {
         title: title,
         content: content,
         RSVP: RSVP,
-        event_time: eventTime.toISOString(),
+        event_time: typeof eventTime === 'string' ? eventTime : eventTime.toISOString(),
         image: image
       };
       return (
@@ -72,7 +117,7 @@ function Create() {
           <div className="row">
             <div className="create-column">
               <h2>Event Creation</h2>
-              <form className="event-form" onSubmit={createEvent}>
+              <form className="event-form" onSubmit={handleSubmission}>
                 <label htmlFor="title">Title:</label>
                 <br />
                 <input

@@ -8,6 +8,7 @@ import EventPage from "./pages/EventPage"
 import EventType from "./pages/EventType"
 import Explore from "./pages/Explore"
 import Create from "./pages/Create"
+import EventDetails from "./pages/EventDetails"
 import ProtectedRoute from "./components/ProtectedRoute"
 
 
@@ -20,7 +21,7 @@ function RegisterAndLogout() {
   localStorage.clear()
   return <Register />
 }
-
+// TODO: Turn Explore back to Home page
 function App() {
   return (
     <BrowserRouter>
@@ -29,9 +30,8 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
-              <Home />
+              <Explore />
             </ProtectedRoute>
-
           }
         />
         <Route
@@ -39,6 +39,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Explore />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/eventDetails/:eventId"
+          element={
+            <ProtectedRoute>
+              <EventDetails />
             </ProtectedRoute>
           }
         />

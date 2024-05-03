@@ -1,0 +1,19 @@
+.edit-button {
+  background-color: #1DF682;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-button {
+  background-color: #f4367b; /* Pinkish */
+  color: black;
+}
+
+.edit-button:hover {
+    background-color: #fff; /* Change background color on hover */
+    color: #1DF682; /* Change text color on hover */
+}
