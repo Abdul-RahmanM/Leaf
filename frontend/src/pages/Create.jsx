@@ -11,9 +11,7 @@ import "../styles/Create.css";
 
 function Create() {
   const location = useLocation();
-  const { eventDetailsFromPrompt } = location.state;
-  const { isEditing } = location.state;
-  const { event } = location.state
+  const { eventDetailsFromPrompt, isEditing, event } = location.state || {};
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [RSVP, setRSVP] = useState(false);
@@ -27,7 +25,7 @@ function Create() {
     const eventDetails = parseEventDetailsFromPrompt(eventDetailsFromPrompt);
     setTitle(eventDetails.Title);
     setContent(eventDetails.Description);
-    setEventTime(new Date(eventDetails.Date));
+    setEventTime(new Date(eventDetails.DateTime));
   }
 
   // Load existing event data because editing
@@ -50,7 +48,8 @@ function Create() {
     formData.append("content", content);
     formData.append("RSVP", RSVP);
     formData.append("event_time", eventTime.toISOString());
-    if (image) {
+
+    if (image instanceof File) {
       formData.append("image", image);
     }
 

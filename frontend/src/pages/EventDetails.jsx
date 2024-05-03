@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import Sidebar from "../components/Sidebar"
 import Header from "../components/Header"
@@ -16,6 +16,7 @@ function EventDetails() {
   const [filters, setFilters] = useState({});
   const [eventCollaborators, setEventCollaborators] = useState([]);
   const [attending, setAttending] = useState(false); // Is the user attending the event
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log("ID", id)
@@ -90,6 +91,18 @@ function EventDetails() {
     const attendButtonText = attending ? "Cancel Attendance!" : "Attend!";
     const isOwner = localStorage.getItem('USER_ID') == event.author
 
+    const deleteEvent = (id) => {
+    api
+      .delete(`/api/events/delete/${id}/`)
+      .then((res) => {
+        if (res.status === 204) alert("Event deleted!");
+        else alert("Failed to delete event.");
+        getEvents(filters);
+      })
+      .catch((error) => alert(error));
+      navigate("../")
+    };
+
     const Button = () => {
         if (!isOwner) { // Check if userId is not equal to event.author
             return (
@@ -101,7 +114,7 @@ function EventDetails() {
             localStorage.getItem('USER_ID')
             return (
                 <div onClick={(e) => e.stopPropagation()}>
-                    <button className="delete-button" onClick={(e) => onDelete(event.id)}>Delete</button>
+                    <button className="delete-button" onClick={(e) => deleteEvent(event.id)}>Delete</button>
                 </div>
             );
         }
