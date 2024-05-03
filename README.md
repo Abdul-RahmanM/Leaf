@@ -25,3 +25,8 @@ Activate Website:
 cd frontend/
 npm run dev
 ```
+
+# Common Webpages
+http://localhost:5173/register
+http://localhost:5173/login
+http://localhost:5173/logout
