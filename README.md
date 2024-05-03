@@ -30,6 +30,12 @@ cd frontend/
 npm run dev
 ```
 
+Created a .env file with the google api key:
+```env
+GOOGLE_API_KEY="" # your key for gemini
+```
+
+
 # Common Webpages
 http://localhost:5173/register
 http://localhost:5173/login
