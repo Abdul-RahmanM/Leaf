@@ -30,7 +30,7 @@ cd frontend/
 npm run dev
 ```
 
-Created a .env file with the google api key:
+Created a .env file in the backend directory with the google api key:
 ```env
 GOOGLE_API_KEY="" # your key for gemini
 ```
