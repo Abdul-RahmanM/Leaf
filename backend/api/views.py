@@ -1,3 +1,5 @@
+import dotenv
+import os
 import google.generativeai as genai
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
@@ -170,7 +172,8 @@ class GeminiPrompt(generics.GenericAPIView):
 
     def post(self, request):
         print("req data", request.data)
-        api_key = "AIzaSyAVB-76wdLIz6EfIrgz2ievZJmp85xRtZA"
+        dotenv.load_dotenv()
+        api_key = os.getenv("GOOGLE_API_KEY")
         prompt = request.data.get("prompt")
         genai.configure(api_key=api_key)
         # Set up the model
