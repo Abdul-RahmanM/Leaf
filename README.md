@@ -4,8 +4,8 @@ An app that helps connect communities by assisting in event creation and adverti
 # Requirements
 Python and NodeJS installed and added to path
 
-Download requirements for python from backend/backend/requirements.txt
-Download requirements for NodeJS. 
+1. Download requirements for python from backend/backend/requirements.txt
+2. Download requirements for NodeJS as shown below. 
 
 ```bash
 cd frontend/
