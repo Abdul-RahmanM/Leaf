@@ -12,6 +12,35 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.delete-button,
+.attend-button {
+  background-color: #1DF682;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-button {
+  background-color: #f44336; /* Red */
+  color: black;
+}
+
+.delete-button:hover,
+.attend-button:hover {
+    background-color: #fff; /* Change background color on hover */
+    color: #1DF682; /* Change text color on hover */
+}
+
+.attend-button {
+  background-color:
 }
 
 .event-image {
@@ -34,3 +63,4 @@
 .event-content {
   text-align: center;
 }
+
